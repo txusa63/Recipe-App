@@ -1,24 +1,27 @@
 const express = require("express");
+const request = require('request')
+const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const app = express();
-const recipesRouter = require("./routes/recipes");
+const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3001;
 
 require("dotenv").config();
 
-app.use(cors());
 app.use(express.json());
-app.use("/recipes", recipesRouter);
+app.use(cookieParser());
 
-const db = process.env.LOCAL_DB;
-mongoose.connect(db, {useNewUrlParser: true, useCreateIndex: true});
+app.use(cors({origin: ['http://localhost:3000'], credentials: true}));
 
-const connection = mongoose.connection;
-
-connection.once("open", () => {
-    console.log("Connection to MongoDB successful...");
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}, (err) => {
+    if(err) {
+        return console.error(err);
+    }
+    console.log('Connection to MongoDB established');
 });
+
+app.use("/recipes", require('./routes/recipes'));
+app.use('/users', require('./routes/users'))
 
 app.listen(PORT, () => {
     console.log(`Server is connected on port ${PORT}`);

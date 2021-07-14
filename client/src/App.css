@@ -1,16 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* min-height: 50%;
+  min-width: 50%; */
+  text-align: center;
+}
+
+
+
+Card {
+  display: flex;
+  flex-direction: column
+}
+
 .labels {
   text-align: center;
   font-family: monospace;
   text-transform: capitalize;
 }
 
-.lists {
+/* .lists {
     border-top: 5px solid;
     border-bottom: 5px solid;
     color: green;
     list-style-type: none;
     font-family: monospace;
-}
+} */
 
 .card-border {
     border: 10px solid;
@@ -37,9 +53,11 @@
     border: 1px solid green;
 }
 
-.App {
+/* .App {
   text-align: center;
-}
+  min-height: 50%;
+  min-width: 50%;
+} */
 
 .App-logo {
   height: 40vmin;

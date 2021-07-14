@@ -1,48 +1,34 @@
-import React from "react";
-import RecipeList from "./RecipeList";
+import React, { useState } from 'react'
+import Form from './Form';
+import Recipes from './Recipes';
 
-export default class Home extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            letter: "",
-            isFromSaved: false
-        };
-        this.handleChange = this.handleChange.bind(this);
-    };
+const Home = () => {
+    const [searchMethod, setSearchMethod] = useState('firstLetter');
+    const [data, setData] = useState([]);
 
-    handleChange(e) {
-        this.setState({
-            letter: e.target.value
-        })
-    }
-
-    render() {
-        return (
-            <div>
-                <h3>Search API with the first letter of the recipe</h3>
-                <form>
-                    <div>
-                        <label>Enter letter below:</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.letter}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                </form>
-                {(() => {
-                    if(this.state.letter !== "") {
-                        return (
-                            <RecipeList
-                                letter={this.state.letter}
-                                isFromSaved={this.state.isFromSaved}
-                            />
-                        )
-                    }
-                })()}
-            </div>
-        )
-    }
+    return (
+        <div>
+            <p>Search API by Choosing Method of Search</p>
+            <label>
+                Search By: {' '}
+                <select
+                    name="searchMethod"
+                    value={searchMethod}
+                    onChange={e => setSearchMethod(e.target.value)}
+                >
+                    <option value="name" >By Name</option>
+                    <option value="firstLetter" >First Letter</option>
+                    <option value="category" >Category</option>
+                    <option value="countryOfOrigin" >By Nationality</option>
+                </select>
+            </label>
+            <Form 
+                searchMethod={searchMethod} 
+                setData={setData}
+            />
+            {<Recipes searchMethod={searchMethod} data={data} />}
+        </div>
+    )
 }
+
+export default Home
