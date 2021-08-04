@@ -7,3 +7,5 @@ The data is fetched by entering the first letter of a recipe, the name of the re
 The user can see the saved recipes and delete a recipe via the delete button in the saved recipe card. 
 
 To use the app the user must create an account or log in if an account already exists. Each account will initially have nothing saved and adding saved recipes will preserve it for that account only. 
+
+Live Demo: https://fatidique-baguette-22666.herokuapp.com/
